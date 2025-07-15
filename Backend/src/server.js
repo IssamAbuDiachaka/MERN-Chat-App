@@ -5,6 +5,7 @@ import { connect } from 'mongoose';
 import connectDB from './lib/db.js'
 import authRouter from './routes/auth.route.js';
 
+
 dotenv.config();
 
 
@@ -13,9 +14,12 @@ const app = express();
 app.use(express.json()); // Allow server to understand json data
 app.use(cors('*')); //Allow frontend to com wit backend
 
+
+
 app.get('/', (req, res) => {
     res.send('API is runnin ...')
 })
+
 app.use('/api/auth', authRouter); // Use authRouter for authentication routes
 
 
