@@ -143,3 +143,111 @@ export const signOut = async (req, res) => {
     });
   }
 };
+
+// Get Authenticated User Info
+export const getMe = async (req, res) => {
+  try {
+    const user = req.user;
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        isOnline: user.isOnline,
+        createdAt: user.createdAt
+      }
+    });
+  } catch (error) {
+    console.error('Fetch user error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching user information',
+      error: error.message
+    });
+  }
+};
+
+// Update User Profile
+export const updateProfile = async (req, res) => {
+  const {
+    username,
+    email,
+    avatar,
+    country,
+    city,
+    bio,
+    address,
+    relationshipStatus,
+    dateOfBirth
+  } = req.body;
+
+  try {
+    const updateData = {};
+
+    // Core user info
+    if (username) updateData.username = username;
+    if (email) updateData.email = email;
+    if (avatar) updateData.avatar = avatar;
+
+    // Location (nested)
+    if (country || city || address) {
+      updateData.location = {};
+      if (country) updateData.location.country = country;
+      if (city) updateData.location.city = city;
+      if (address) updateData.location.address = address;
+    }
+
+    // Other profile fields
+    if (relationshipStatus) updateData.relationshipStatus = relationshipStatus;
+    if (dateOfBirth) updateData.dateOfBirth = dateOfBirth;
+// bio
+    if (bio) updateData.bio = bio;
+
+    // Check for username/email duplicates (except self)
+    const existingUser = await userModel.findOne({
+      _id: { $ne: req.user._id },
+      $or: [
+        username ? { username } : {},
+        email ? { email } : {}
+      ].filter(Boolean)
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username or email already in use' });
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      req.user._id,
+      updateData,
+      {
+        new: true,
+        runValidators: true
+      }
+    ).select('-password');
+
+    res.status(200).json({
+      success: true,
+      message: 'Profile updated successfully',
+      user: updatedUser
+    });
+
+  } catch (error) {
+    console.error('Update profile error:', error);
+
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation error',
+        errors: Object.values(error.errors).map(err => err.message)
+      });
+    }
+
+    if (error.code === 11000) {
+      return res.status(400).json({ message: 'Username or email already exists' });
+    }
+
+    res.status(500).json({ message: 'Profile update failed', error: error.message });
+  }
+};

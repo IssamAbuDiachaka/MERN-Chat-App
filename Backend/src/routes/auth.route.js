@@ -1,6 +1,6 @@
 // Import required packages
 import express from 'express';
-import  {signOut, signUp, signIn} from '../controllers/auth.controllers.js';
+import  {signOut, signUp, signIn, getMe, updateProfile} from '../controllers/auth.controllers.js';
 import auth from '../middleware/auth.js';
 
 
@@ -15,6 +15,12 @@ authRouter.post('/sign-in', signIn);
 
 // post /api/auth/logout
 authRouter.get('/sign-out', auth, signOut);
+
+// Get current user route get /api/auth/me
+authRouter.get('/get-me', auth, getMe);
+
+// update user
+authRouter.put('/updateProfile', auth, updateProfile);
 
 
 

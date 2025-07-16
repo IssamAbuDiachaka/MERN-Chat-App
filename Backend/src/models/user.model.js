@@ -29,7 +29,28 @@ const userSchema = new mongoose.Schema({
   isOnline: {
     type: Boolean,       // true or false
     default: false       // New users start offline
+  },
+
+  location: {
+    country: String,
+    city: String,
+    address: String
+  },
+
+  bio: {
+    type: String,
+    maxlength: 200       // At most 200 characters
+  },
+
+relationshipStatus: {
+    type: String,
+    enum: ['Single', 'In a Relationship', 'Married', 'Complicated', 'Prefer not to say'],
+  },
+
+  dateOfBirth: {
+    type: Date,
   }
+
 }, {
   timestamps: true       // Automatically adds createdAt and updatedAt
 });

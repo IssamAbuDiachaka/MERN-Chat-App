@@ -4,6 +4,7 @@ import cors from 'cors';
 import { connect } from 'mongoose';
 import connectDB from './lib/db.js'
 import authRouter from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 
 
 dotenv.config();
@@ -13,7 +14,7 @@ const app = express();
 // Middleware
 app.use(express.json()); // Allow server to understand json data
 app.use(cors('*')); //Allow frontend to com wit backend
-
+app.use(cookieParser()); // Allows server to parse cookies
 
 
 app.get('/', (req, res) => {
