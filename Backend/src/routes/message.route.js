@@ -4,14 +4,15 @@ import auth from '../middleware/auth.js';
 
 const messageRouter = express.Router();
 
-messageRouter.post('/send-message', auth, sendMessage); // Route to send a new message
+messageRouter.get('/chats', auth, getConversations); // Route to get conversations for the current user
 
-messageRouter.get('/:userId', auth, getMessages); // Route to get messages 
+messageRouter.get('/getmessages/:userId', auth, getMessages); // Route to get messages between two users
 
-messageRouter.get('/', auth, getConversations); // Route to get conversations for the current user
+messageRouter.post('/send-message', auth, sendMessage); // Route to send a new message from A to B
+
+messageRouter.get('/messageInfo/:messageId', auth, getMessageInfo); // Route to get all conversations for the current user
 
 messageRouter.delete('/:messageId', auth, deleteMessage); // Route to delete a message
 
-messageRouter.get('/messageId', auth, getMessageInfo); // Route to get all conversations for the current user
 
 export default messageRouter;
