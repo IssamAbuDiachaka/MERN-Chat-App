@@ -89,6 +89,7 @@ export const getMessages = async (req, res) => {
     .sort({ createdAt: -1 })  // Newest first
     .skip(skip)
     .limit(limit);
+    console.log(messages);
     
     // Get total count for pagination
     const totalMessages = await messageModel.countDocuments({
