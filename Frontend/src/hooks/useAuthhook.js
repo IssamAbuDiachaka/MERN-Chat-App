@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import api from "../lib/axios";
 
 const useAuthHook = create((set) => ({
   authUser: null,
@@ -8,13 +9,8 @@ const useAuthHook = create((set) => ({
     set({ isCheckingAuth: true });
 
     try {
-      const response = await fetch("/api/auth/check");
-      const data = await response.json();
-
-      set({
-        authUser: data.user || null,
-        isCheckingAuth: false,
-      });
+      const response = await api.get("/auth/check");
+      set({authUser: response.data.user, isCheckingAuth: false});
     } catch (error) {
       console.error("Error checking authentication:", error);
       set({ isCheckingAuth: false });

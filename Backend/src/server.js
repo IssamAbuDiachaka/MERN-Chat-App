@@ -13,9 +13,13 @@ dotenv.config();
 const app = express();
 // Middleware
 app.use(express.json()); // Allow server to understand json data
-app.use(cors('*')); //Allow frontend to com wit backend
 app.use(cookieParser()); // Allows server to parse cookies
 // Connect to MongoDB
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow requests from this origin
+    credentials: true, // Allow cookies to be sent with requests
+    })); //Allow frontend to com wit backend
+
 
 
 app.get('/', (req, res) => {

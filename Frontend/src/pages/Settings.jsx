@@ -6,4 +6,4 @@ function SettingsPage() {
   )
 }
 
-export default Page
+export default SettingsPage

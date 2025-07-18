@@ -251,3 +251,23 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ message: 'Profile update failed', error: error.message });
   }
 };
+
+
+export const checkAuth = async (req, res) => {
+  try {
+    if (!res.req.user) {
+      return res.status(401).json({
+        message: 'User not authenticated'
+      });
+    }
+    res.status(200).json({
+      success: true,
+      user: req.user,
+    });
+  } catch (error) {
+    console.error('Check auth error:', error);
+    res.status(500).json({
+      message: 'Server error during authentication check',
+      error: error.message
+    });
+}}
