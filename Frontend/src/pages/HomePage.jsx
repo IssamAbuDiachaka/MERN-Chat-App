@@ -1,42 +1,60 @@
 import { Users } from 'lucide-react';
-import React from 'react'
+import React from 'react';
 import ChartCard from '../components/ChartCard.jsx';
 
 function HomePage() {
   return (
-    <div className='w-full h-screen pt-15 h-screen border'>
+    <div className='w-full h-screen pt-15 h-screen border overflow-hidden'>
 
-      {/* sidebar area */}
-      <div className='border w-[40%] relative bg-gray-200/25 h-screen p-10'>
+      {/* sidebar section */}
+      <aside className='border w-[40%] max-w-md bg-gray-200/25 h-screen h-full p-5 overflow-y-auto'>
+      <div className='rounded border'>
 
         {/* sidebar header */}
-        <div className='w-full border-b '>
+        <div className='w-full border-b fix'>
           <div className='flex m-2'>
             <Users />
             <h2>Contacts</h2>
           </div>
-          <div className='flex m-2 '>
+          <div className='flex m-2'>
             <label htmlFor="">
-              <input type="checkbox" name='checkbox' value="" /> Online Contacts 
+              <input type="checkbox" name="checkbox" value="" /> Online 
             </label>
           </div>
         </div>
 
-        {/* slidebar Profilecard */}
-
-           <ChartCard />
-
+        {/* sidebar Profilecard */}
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
+        <ChartCard />
       </div>
-
+      </aside>
 
       {/* main content area */}
       <div>
-
+        {/* Main content goes here */}
       </div>
 
-
-      </div>
-  )
+    </div>
+  );
 }
 
-export default HomePage
+export default HomePage;
