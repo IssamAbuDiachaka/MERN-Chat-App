@@ -6,6 +6,7 @@ import SignUpPage from './pages/SignUpPage';
 import useAuthHook from './hooks/useAuthhook';
 import { useEffect } from 'react';
 import NavBar from './components/NavBar';
+import HomePage from './pages/HomePage';
 
 function App() {
   const {authUser, checkAuth} = useAuthHook();
@@ -21,7 +22,8 @@ function App() {
       <NavBar authUser={authUser} />
 
       <Routes>
-        <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/signin" />} />
+        {/* <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/signin" />} /> */}
+        <Route path='/' element = {<HomePage />} /> 
 
         <Route path='/pofile' element={authUser ? <ProfilePage /> : <Navigate to="/signin" />} />
 

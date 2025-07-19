@@ -15,14 +15,15 @@ function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="w-full h-screen items-center">
-      <div className="grid md:grid-cols-2">
-        <div className="w-full flex flex-col items-center">
+    <div className="w-full h-screen items-center pt-15 h-screen">
+      <div className="grid md:grid-cols-2 border h-screen p-10">
+        <div className="w-full flex flex-col items-center border p-4">
           <MessagesSquareIcon />
           <h2>Welcome</h2>
           <p>Create a new account</p>
 
           <form className="w-full relative p-8 space-y-4">
+
             <div className="relative flex w-full items-center">
               <User className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
               <label htmlFor="username" className="w-full">
@@ -95,7 +96,8 @@ function SignUpPage() {
             </Link>
            </div>
         </div>
-        <div className="w-full">
+
+        <div className="w-full border-">
           <AuthSkeleton title={"Welcome to HackChat"} text={"Join our community of hackers to learn how to build the next web"}/>
         </div>
       </div>
