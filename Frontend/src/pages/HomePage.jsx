@@ -4,14 +4,13 @@ import ChartCard from '../components/ChartCard.jsx';
 
 function HomePage() {
   return (
-    <div className='w-full h-screen pt-15 h-screen border overflow-hidden'>
+    <div className='w-full h-screen pt-15 h-screen border overflow-hidden flex'>
 
       {/* sidebar section */}
-      <aside className='border w-[40%] max-w-md bg-gray-200/25 h-screen h-full p-5 overflow-y-auto'>
-      <div className='rounded border'>
+      <aside className='border w-[40%] max-w-md bg-gray-200/25 h-screen h-full p-5 flex flex-col'>
 
-        {/* sidebar header */}
-        <div className='w-full border-b fix'>
+        {/* head section */}
+        <div className='border'>
           <div className='flex m-2'>
             <Users />
             <h2>Contacts</h2>
@@ -24,28 +23,29 @@ function HomePage() {
         </div>
 
         {/* sidebar Profilecard */}
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-        <ChartCard />
-      </div>
+        <div className='overflow-y-auto border'>
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+          <ChartCard />
+        </div>
       </aside>
 
       {/* main content area */}
