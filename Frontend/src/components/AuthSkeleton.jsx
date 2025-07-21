@@ -18,4 +18,12 @@ function AuthSkeleton({title, text}) {
   )
 }
 
+// sign up function
+
+
+
+
+//  Sign in
+//Update profile
+
 export default AuthSkeleton;

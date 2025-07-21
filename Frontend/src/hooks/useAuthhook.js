@@ -5,13 +5,14 @@ import toast from "daisyui/components/toast";
 const useAuthHook = create((set) => ({
   authUser: null,
   isCheckingAuth: false,
+  isSigningUp: false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
 
     try {
       const response = await api.get("/auth/check");
-      set({authUser: response.data.user, isCheckingAuth: false});
+      set({ authUser: response.data.user, isCheckingAuth: false });
     } catch (error) {
       console.error("Error checking authentication:", error);
       set({ isCheckingAuth: false });
@@ -19,26 +20,29 @@ const useAuthHook = create((set) => ({
   },
 
   signUp: async (data) => {
+    set({ isSigningUp: true });
     // validate input fields
-    if  (!data.username || !data.email || !data.password){
-        console.log("all requied fields must be provided");
-        return;
+    if (!data.username || !data.email || !data.password) {
+      console.log("all requied fields must be provided");
+      return;
     }
     // Now call backend enpoint and pass data
     try {
       const response = await api.post("/auth/sign-up", {
-        data
-      })
-      if (response.data){
+        data,
+      });
+      if (response.data) {
         return {
-          success: true, 
-        }
-        toast.success("Sign Up Successful")
+          success: true,
+        };
+        toast.success("Sign Up Successful");
       }
-    } catch (error){
+    } catch (error) {
       console.log(error);
+    } finally {
+      set({ isSigningUp: false });
     }
-  }
+  },
 }));
 
 export default useAuthHook;

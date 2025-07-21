@@ -10,9 +10,35 @@ import {
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthSkeleton from "../components/AuthSkeleton";
+import useAuthHook from "../hooks/useAuthhook";
+
 
 function SignUpPage() {
+  const {signUp, isSigningUp} = useAuthHook();
+
   const [showPassword, setShowPassword] = useState(false);
+
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    avater: ""
+  });
+
+  const handleUserDataSubmit = (e) => {
+    e.preventDefault;
+    signUp(userData); 
+  }
+
+  console.log(userData.userData)
+
+  if (isSigningUp){
+    <div>
+      <div>
+        
+      </div>
+    </div>
+  }
 
   return (
     <div className="w-full h-screen items-center pt-15 h-screen">
@@ -24,6 +50,7 @@ function SignUpPage() {
 
           <form className="w-full relative p-8 space-y-4">
 
+            {/* // username field */}
             <div className="relative flex w-full items-center">
               <User className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
               <label htmlFor="username" className="w-full">
@@ -32,10 +59,13 @@ function SignUpPage() {
                   id="username"
                   placeholder="sahadev"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  value={userData.username}
+                  onChange={(e) => setUserData({ ...userData, username: e.target.value})}
                 />
               </label>
             </div>
 
+            {/* email field */}
             <div className="relative flex w-full items-center">
               <MessageSquareIcon className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
               <label htmlFor="email" className="w-full">
@@ -44,10 +74,13 @@ function SignUpPage() {
                   id="email"
                   placeholder="example@gmail.com"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  value={userData.email}
+                  onChange={(e) => setUserData({ ...userData, email: e.target.value})}
                 />
               </label>
             </div>
 
+            {/* password field  */}
             <div className="relative flex w-full items-center">
               <Lock className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
               <label htmlFor="email" className="w-full">
@@ -56,6 +89,8 @@ function SignUpPage() {
                   id="password"
                   placeholder="••••••••••"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  value={userData.password}
+                  onChange={(e) => setUserData({  ...userData, password: e.target.value})}
                 />
               </label>
               {showPassword ? (
@@ -79,12 +114,14 @@ function SignUpPage() {
                   id="url"
                   placeholder="Enter your avatar url"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  value={userData.avater}
+                  onChange={(e) => setUserData({...userData, avater: e.target.value})}
                 />
               </label>
             </div>
 
             <div>
-              <button type="submit" className="w-full p-3 bg-green-800 text-gray-300 rounded">
+              <button type="submit" className="w-full p-3 bg-green-800 text-gray-300 rounded" onClick={handleUserDataSubmit}>
                 Create an account
               </button>
             </div>
