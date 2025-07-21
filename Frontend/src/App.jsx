@@ -7,6 +7,7 @@ import useAuthHook from './hooks/useAuthhook';
 import { useEffect } from 'react';
 import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const {authUser, checkAuth} = useAuthHook();
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <div>
+      <Toaster />
       <NavBar authUser={authUser} />
 
       <Routes>
