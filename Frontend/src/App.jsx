@@ -7,7 +7,7 @@ import useAuthHook from './hooks/useAuthhook';
 import { useEffect } from 'react';
 import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const {authUser, checkAuth} = useAuthHook();
@@ -21,11 +21,13 @@ function App() {
   return (
     <div>
       <Toaster />
+
       <NavBar authUser={authUser} />
 
       <Routes>
-        {/* <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/signin" />} /> */}
-        <Route path='/' element = {<HomePage />} /> 
+        <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/signin" />} />
+
+        {/* <Route path='/' element = {<HomePage />} />  */}
 
         <Route path='/pofile' element={authUser ? <ProfilePage /> : <Navigate to="/signin" />} />
 

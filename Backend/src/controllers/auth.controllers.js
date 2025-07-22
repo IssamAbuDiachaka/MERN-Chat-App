@@ -10,6 +10,7 @@ export const signUp = async (req, res) => {
     const email = data.email;
     const password = data.password;
     const avatar = data?.avater;
+    console.log(data);
     try {
         // validate data
         if(!username || !email || !password) {

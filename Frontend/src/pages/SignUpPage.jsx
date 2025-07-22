@@ -14,6 +14,7 @@ import useAuthHook from "../hooks/useAuthhook";
 
 
 function SignUpPage() {
+
   const {signUp, isSigningUp} = useAuthHook();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -26,19 +27,18 @@ function SignUpPage() {
   });
 
   const handleUserDataSubmit = (e) => {
-    e.preventDefault;
     signUp(userData); 
+    e.preventDefault();
   }
 
-  console.log(userData.userData)
 
-  if (isSigningUp){
-    <div>
-      <div>
+  // if (isSigningUp){
+  //   <div>
+  //     <div>
         
-      </div>
-    </div>
-  }
+  //     </div>
+  //   </div>
+  // }
 
   return (
     <div className="w-full h-screen items-center pt-15 h-screen">
@@ -106,6 +106,7 @@ function SignUpPage() {
               )}
             </div>
 
+              {/* avatar field */}
             <div className="relative flex w-full items-center">
               <Image className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
               <label htmlFor="email" className="w-full">
@@ -119,13 +120,14 @@ function SignUpPage() {
                 />
               </label>
             </div>
-
+              {/* submit button */}
             <div>
               <button type="submit" className="w-full p-3 bg-green-800 text-gray-300 rounded" onClick={handleUserDataSubmit}>
                 Create an account
               </button>
             </div>
           </form>
+
           <div className="flex flex-wrap items-center space-x-2">
             <p>Have an account?</p>
             <Link to="/signin" className="underline cursor-pointer">
@@ -134,7 +136,7 @@ function SignUpPage() {
            </div>
         </div>
 
-        <div className="w-full border-">
+        <div className="w-full">
           <AuthSkeleton title={"Welcome to HackChat"} text={"Join our community of hackers to learn how to build the next web"}/>
         </div>
       </div>

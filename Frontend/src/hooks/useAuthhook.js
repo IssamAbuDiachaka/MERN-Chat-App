@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import api from "../lib/axios";
-import toast from "daisyui/components/toast";
+import toast from "react-hot-toast";
 
 const useAuthHook = create((set) => ({
   authUser: null,
@@ -24,6 +24,7 @@ const useAuthHook = create((set) => ({
     // validate input fields
     if (!data.username || !data.email || !data.password) {
       console.log("all requied fields must be provided");
+      set({ isSigningUp: false });
       return;
     }
     // Now call backend enpoint and pass data
@@ -32,12 +33,13 @@ const useAuthHook = create((set) => ({
         data,
       });
       if (response.data) {
+        toast.success("Sign Up Successful");
         return {
           success: true,
         };
-        toast.success("Sign Up Successful");
       }
     } catch (error) {
+      toast.error("Signup faild! try again.")
       console.log(error);
     } finally {
       set({ isSigningUp: false });

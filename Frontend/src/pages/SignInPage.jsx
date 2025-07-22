@@ -10,9 +10,22 @@ import {
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthSkeleton from "../components/AuthSkeleton";
+import useAuthHook from "../hooks/useAuthhook";
 
 function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
+
+  const {formData, setFormData} = useState({
+    email: "",
+    password: "",
+  })
+
+  const {signIn, setSignIn} = useAuthHook();
+
+  const handleFormSubmit = (e) => {
+    signIn(formData);
+    e.preventDefault();
+  }
 
   return (
     <div className="w-full h-screen items-center pt-15 h-screen">
@@ -21,9 +34,10 @@ function SignInPage() {
           <MessagesSquareIcon />
           <h2>Welcome</h2>
           <p>Sign Into Your Account</p>
-
+            {/* signin form */}
           <form className="w-full relative p-8 space-y-4">
 
+              {/* email field */}
             <div className="relative flex w-full items-center">
               <MessageSquareIcon className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
               <label htmlFor="email" className="w-full">
@@ -32,10 +46,13 @@ function SignInPage() {
                   id="email"
                   placeholder="example@gmail.com"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
                 />
               </label>
             </div>
 
+            {/* password field */}
             <div className="relative flex w-full items-center">
               <Lock className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
               <label htmlFor="email" className="w-full">
@@ -44,6 +61,8 @@ function SignInPage() {
                   id="password"
                   placeholder="••••••••••"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  value={formData.password}
+                  onChange={(e) => setFormData({...formData, password: e.target.value})}
                 />
               </label>
               {showPassword ? (
@@ -59,9 +78,11 @@ function SignInPage() {
               )}
             </div>
 
-
+              {/* signIn button */}
             <div>
-              <button type="submit" className="w-full p-3 bg-green-800 text-gray-300 rounded">
+              <button type="submit" className="w-full p-3 bg-green-800 text-gray-300 rounded"
+              onClick={handleFormSubmit}
+              >
                 Sign In
               </button>
             </div>
