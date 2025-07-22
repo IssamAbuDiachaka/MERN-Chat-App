@@ -11,14 +11,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthSkeleton from "../components/AuthSkeleton";
 import useAuthHook from "../hooks/useAuthhook";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 function SignUpPage() {
-
-  const {signUp, isSigningUp} = useAuthHook();
-
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
+  const {signUp, isSigningUp} = useAuthHook();
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -26,9 +27,14 @@ function SignUpPage() {
     avater: ""
   });
 
-  const handleUserDataSubmit = (e) => {
-    signUp(userData); 
+  const handleUserDataSubmit = async (e) => {
     e.preventDefault();
+    const result = await signUp(userData)
+    if (result.success) {
+      navigate ("/signin");
+    } else {
+      toast.error("Failed to sign up try again.");
+    }
   }
 
 

@@ -8,14 +8,17 @@ import {
   User,
 } from "lucide-react";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthSkeleton from "../components/AuthSkeleton";
 import useAuthHook from "../hooks/useAuthhook";
+import toast from "react-hot-toast";
 
 function SignInPage() {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
 
-  const {formData, setFormData} = useState({
+  const {userData, setUserData} = useState({
     email: "",
     password: "",
   })
@@ -23,9 +26,15 @@ function SignInPage() {
   const {signIn, setSignIn} = useAuthHook();
 
   const handleFormSubmit = (e) => {
-    signIn(formData);
     e.preventDefault();
-  }
+    const result = signIn(userData);
+    if (result?.success){
+      toast.success("Signed In Successfully")
+    navigate("/")
+    } else {
+      toast.error ("Invalid Cridentials");
+    };
+  };
 
   return (
     <div className="w-full h-screen items-center pt-15 h-screen">
@@ -46,8 +55,8 @@ function SignInPage() {
                   id="email"
                   placeholder="example@gmail.com"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  value={userData.email}
+                  onChange={(e) => setUserData({...userData, email: e.target.value})}
                 />
               </label>
             </div>
@@ -62,7 +71,7 @@ function SignInPage() {
                   placeholder="••••••••••"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
                   value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                  onChange={(e) => setUserData({...userData, password: e.target.value})}
                 />
               </label>
               {showPassword ? (

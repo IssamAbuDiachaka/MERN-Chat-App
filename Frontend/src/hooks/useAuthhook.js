@@ -45,6 +45,8 @@ const useAuthHook = create((set) => ({
       set({ isSigningUp: false });
     }
   },
+  
 }));
+
 
 export default useAuthHook;
