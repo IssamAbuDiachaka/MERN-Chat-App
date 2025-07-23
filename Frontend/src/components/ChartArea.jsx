@@ -4,8 +4,8 @@ import ChartCard from './ChartCard'
 function ChartArea() {
   return (
     <div>
-        <div className='border '>
-            <ChartCard />
+        <div className=''>
+            
         </div>
 
     </div>

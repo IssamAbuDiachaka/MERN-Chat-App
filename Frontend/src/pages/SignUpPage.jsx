@@ -30,11 +30,8 @@ function SignUpPage() {
   const handleUserDataSubmit = async (e) => {
     e.preventDefault();
     const result = await signUp(userData)
-    if (result.success) {
-      navigate ("/signin");
-    } else {
-      toast.error("Failed to sign up try again.");
-    }
+    if (result.success)
+    navigate ("/signin");
   }
 
 

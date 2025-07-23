@@ -14,26 +14,35 @@ import useAuthHook from "../hooks/useAuthhook";
 import toast from "react-hot-toast";
 
 function SignInPage() {
+
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const {userData, setUserData} = useState({
+  const {signIn, setSignIn} = useAuthHook();
+
+  const [userData, setUserData] = useState({
     email: "",
     password: "",
   })
 
-  const {signIn, setSignIn} = useAuthHook();
+ 
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const result = signIn(userData);
-    if (result?.success){
-      toast.success("Signed In Successfully")
-    navigate("/")
-    } else {
-      toast.error ("Invalid Cridentials");
-    };
+    try{
+      const result = await signIn(userData);
+      if (result?.success){
+        setTimeout(() => {
+          navigate("/");
+        }, 300);
+      } else {
+        toast.error("Invalid Credentials")
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.error(error);
+    }
   };
 
   return (
@@ -64,13 +73,13 @@ function SignInPage() {
             {/* password field */}
             <div className="relative flex w-full items-center">
               <Lock className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
-              <label htmlFor="email" className="w-full">
+              <label htmlFor="password" className="w-full">
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder="••••••••••"
                   className="border rounded p-1 w-full border-gray-500/45 pl-7"
-                  value={formData.password}
+                  value={userData.password}
                   onChange={(e) => setUserData({...userData, password: e.target.value})}
                 />
               </label>

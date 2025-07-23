@@ -6,6 +6,7 @@ const useAuthHook = create((set) => ({
   authUser: null,
   isCheckingAuth: false,
   isSigningUp: false,
+  isSigningIn: false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
@@ -45,6 +46,31 @@ const useAuthHook = create((set) => ({
       set({ isSigningUp: false });
     }
   },
+
+  signIn: async (data) => {
+    set({isSigningIn: true})
+    if (!data.email || !data.password){
+      set({isSigningIn: false})
+      return{error: "email and password required"};
+    }
+
+    try {
+      const response = await api.post("/auth/sign-in", data);
+      if (response.data){
+        toast.success("Sign in successful!")
+        return {
+          success: true,
+        }
+      }
+    } catch (error){
+      console.error("Error signing in", error)
+      return {error: "Sign in failed"}
+    } finally {
+      set({isSigningIn: false});
+    }
+
+  },
+
   
 }));
 
