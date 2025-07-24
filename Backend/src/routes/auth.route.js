@@ -11,16 +11,16 @@ const authRouter = express.Router();
 authRouter.post('/sign-up', signUp);
 
 // Sign In route post /api/auth/sign-in
-authRouter.post('/sign-in', signIn);
+authRouter.post('/log-in', signIn);
 
 // post /api/auth/logout
-authRouter.get('/sign-out', auth, signOut);
+authRouter.post('/log-out', auth, signOut);
 
 // Get current user route get /api/auth/me
 authRouter.get('/get-me', auth, getMe);
 
 // update user
-authRouter.put('/updateProfile', auth, updateProfile);
+authRouter.put('/update-profile', auth, updateProfile);
 
 authRouter.get('/check', auth, checkAuth);
 

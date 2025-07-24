@@ -2,15 +2,12 @@ import bcrypt from "bcryptjs";
 import userModel from "../models/user.model.js";
 import generateJWT from "../utils/generateJWT.js";
 
+
 // Sign Up function
 export const signUp = async (req, res) => {
 
-    const {data} = req.body;
-    const username = data.username;
-    const email = data.email;
-    const password = data.password;
-    const avatar = data?.avater;
-    console.log(data);
+    const { username, email, password, avatar } = req.body;
+    
     try {
         // validate data
         if(!username || !email || !password) {
