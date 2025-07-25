@@ -11,9 +11,11 @@ import {
   Users,
   Volume2,
 } from 'lucide-react';
+import ThemeSwitcher from '../components/layout/ThemeSwitcher';
 
 const SettingsPage = () => {
   const { authUser, logout } = useAuthStore();
+
   const [settings, setSettings] = useState({
     theme: 'light',
     notifications: true,
@@ -61,6 +63,7 @@ const SettingsPage = () => {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-2xl mx-auto px-4">
         <div className="card p-8 space-y-8">
+
           {/* Header */}
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
@@ -76,16 +79,15 @@ const SettingsPage = () => {
               title="Theme"
               description="Choose your preferred theme"
             >
-              <select
-                value={settings.theme}
-                onChange={(e) => handleSettingChange('theme', e.target.value)}
-                className="input w-32"
-              >
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="system">System</option>
-              </select>
+
+            <ThemeSwitcher
+              value={settings.theme}
+              onChange={(val) => handleSettingChange('theme', val)}
+            />
             </SettingItem>
+
+
+
 
             <SettingItem
               icon={Palette}

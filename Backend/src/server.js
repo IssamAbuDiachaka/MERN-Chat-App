@@ -6,14 +6,14 @@ import connectDB from './lib/db.js'
 import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 
-
 dotenv.config();
 
-
 const app = express();
+
 // Middleware
 app.use(express.json()); // Allow server to understand json data
 app.use(cookieParser()); // Allows server to parse cookies
+
 // Connect to MongoDB
 app.use(cors({
     origin: 'http://localhost:3000', // Allow requests from this origin
