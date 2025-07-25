@@ -35,6 +35,7 @@ const Navbar = () => {
               {/* Dropdown Menu */}
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="py-1">
+
                   <Link
                     to="/profile"
                     className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -42,6 +43,7 @@ const Navbar = () => {
                     <User className="w-4 h-4" />
                     Profile
                   </Link>
+
                   <Link
                     to="/settings"
                     className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -49,7 +51,9 @@ const Navbar = () => {
                     <Settings className="w-4 h-4" />
                     Settings
                   </Link>
+
                   <hr className="my-1" />
+
                   <button
                     onClick={logout}
                     className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
@@ -57,6 +61,7 @@ const Navbar = () => {
                     <LogOut className="w-4 h-4" />
                     Sign out
                   </button>
+                  
                 </div>
               </div>
             </div>

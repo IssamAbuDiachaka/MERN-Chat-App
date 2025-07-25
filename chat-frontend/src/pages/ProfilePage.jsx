@@ -46,9 +46,7 @@ const ProfilePage = () => {
     e.preventDefault();
     try {
       await updateProfile(formData);
-      toast.success('Profile updated');
     } catch (err) {
-      toast.error('Update failed');
     }
   };
 

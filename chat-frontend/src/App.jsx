@@ -8,6 +8,9 @@ import SettingsPage from './pages/SettingsPage';
 import HomePage from './pages/HomePage';
 import Navbar from './components/layout/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
+import { Toaster } from 'react-hot-toast';
+import { ThemeProvider } from 'next-themes';
+
 
 const App = () => {
   const { authUser, isCheckingAuth, checkAuth } = useAuthStore();
@@ -21,8 +24,10 @@ const App = () => {
   }
 
   return (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}> 
     <div>
       {authUser && <Navbar />}
+      <Toaster />
       <Routes>
         <Route
           path="/login"
@@ -46,6 +51,7 @@ const App = () => {
         />
       </Routes>
     </div>
+    </ThemeProvider>
   );
 };
 
