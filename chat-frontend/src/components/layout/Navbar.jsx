@@ -4,6 +4,7 @@ import { MessageSquare, Settings, User, LogOut } from 'lucide-react';
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
+  console.log('authUser:', authUser);
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 fixed w-full top-0 z-40">
@@ -22,12 +23,12 @@ const Navbar = () => {
             <div className="relative group">
               <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 transition-colors">
                 <img
-                  src={authUser?.profilePic || '/avatar.png'}
-                  alt={authUser?.username || 'User'}
+                  src={authUser?.user?.avater || '/avatar.png'}
+                  alt={authUser?.user?.username || 'User'}
                   className="w-8 h-8 rounded-full object-cover"
                 />
                 <span className="hidden md:block text-sm font-medium text-gray-700">
-                  {authUser?.username || 'User'}
+                  {authUser?.user?.username || 'User'}
                 </span>
               </button>
 
