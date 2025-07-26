@@ -6,13 +6,13 @@ const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
   const { onlineUsers } = useAuthStore();
   
-  console.log("SelectedUser ID:", selectedUser?._id);
-  console.log("Online Users:", onlineUsers);
-  console.log(
-    "Is Online:",
-    selectedUser?._id &&
-      onlineUsers.some((user) => user._id === selectedUser._id)
-  );
+  // console.log("SelectedUser ID:", selectedUser?._id);
+  // console.log("Online Users:", onlineUsers);
+  // console.log(
+  //   "Is Online:",
+  //   selectedUser?._id &&
+  //     onlineUsers.some((user) => user._id === selectedUser._id)
+  // );
   
   return (
     <div className="border-b border-gray-200 py-2 px-4 pt-8 flex items-center justify-between bg-white mt-2">
