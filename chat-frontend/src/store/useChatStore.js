@@ -17,10 +17,12 @@ export const useChatStore = create((set, get) => ({
 
   // Actions
   getUsers: async () => {
+    
     set({ isUsersLoading: true });
     try {
       const res = await api.get('/message/chats');
       set({ users: res.data.data });
+      console.log(res.data);
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to load users');
     } finally {
