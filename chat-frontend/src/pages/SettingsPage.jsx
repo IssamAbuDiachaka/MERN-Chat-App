@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ThemeSwitcher from '../components/layout/ThemeSwitcher';
 import { useAuthStore } from '../store/useAuthStore';
 import {
   Bell,
@@ -11,7 +12,6 @@ import {
   Users,
   Volume2,
 } from 'lucide-react';
-import ThemeSwitcher from '../components/layout/ThemeSwitcher';
 
 const SettingsPage = () => {
   const { authUser, logout } = useAuthStore();
@@ -171,14 +171,14 @@ const SettingsPage = () => {
             <h2 className="text-xl font-semibold text-gray-900">Account</h2>
             <SettingItem
               icon={Lock}
-              title="Sign Out"
-              description="Sign out from your account"
+              title="Log Out"
+              description="Log out from your account"
             >
               <button
                 onClick={logout}
                 className="btn btn-secondary"
               >
-                Sign Out
+                Log Out
               </button>
             </SettingItem>
           </div>

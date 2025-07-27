@@ -10,6 +10,7 @@ const Navbar = () => {
     <header className="bg-white shadow-sm border-b border-gray-200 fixed w-full top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5">
             <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -22,14 +23,15 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             <div className="relative group">
               <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <span className="hidden md:block text-sm font-medium text-gray-700">
+                  {authUser?.user?.username || 'User'}
+                </span>
                 <img
-                  src={authUser?.user?.avater || '/avatar.png'}
+                  src={authUser?.user?.avatar || '/avatar.png'}
                   alt={authUser?.user?.username || 'User'}
                   className="w-8 h-8 rounded-full object-cover"
                 />
-                <span className="hidden md:block text-sm font-medium text-gray-700">
-                  {authUser?.user?.username || 'User'}
-                </span>
+
               </button>
 
               {/* Dropdown Menu */}
@@ -59,7 +61,7 @@ const Navbar = () => {
                     className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
                     <LogOut className="w-4 h-4" />
-                    Sign out
+                     Log out
                   </button>
                   
                 </div>

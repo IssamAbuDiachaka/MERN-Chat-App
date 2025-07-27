@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import userModel from "../models/user.model.js";
 import generateJWT from "../utils/generateJWT.js";
-
+import cloudinary from "../lib/cloudinary.js";
 
 // Sign Up function
 export const signUp = async (req, res) => {
@@ -186,13 +186,22 @@ export const updateProfile = async (req, res) => {
     dateOfBirth
   } = req.body;
 
+
+
   try {
     const updateData = {};
 
     // Core user info
     if (username) updateData.username = username;
     if (email) updateData.email = email;
-    if (avatar) updateData.avatar = avatar;
+
+    
+    // if avater den cloudinary respond and to db
+    const imageUploadRes = await cloudinary.uploader.upload(avatar);
+    const avatarUrl = imageUploadRes.secure_url
+    if (avatar) {
+      updateData.avatar = avatarUrl
+    }
 
     // Location (nested)
     if (country || city || address) {
@@ -205,9 +214,8 @@ export const updateProfile = async (req, res) => {
     // Other profile fields
     if (relationshipStatus) updateData.relationshipStatus = relationshipStatus;
     if (dateOfBirth) updateData.dateOfBirth = dateOfBirth;
-// bio
+    // bio
     if (bio) updateData.bio = bio;
-
     // Check for username/email duplicates (except self)
     const existingUser = await userModel.findOne({
       _id: { $ne: req.user._id },
