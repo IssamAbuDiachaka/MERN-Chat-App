@@ -5,13 +5,18 @@ import { X, Phone, Video, MoreVertical } from 'lucide-react';
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
   const { onlineUsers } = useAuthStore();
+
+
+
+  // console.log('online users', onlineUsers);
+  // console.log('selected users', selectedUser);
   
   // console.log("SelectedUser ID:", selectedUser?._id);
-  // console.log("Online Users:", onlineUsers);
+  // console.log("Online Users:", onlineUsers.push(selectedUser?._id));
   // console.log(
   //   "Is Online:",
   //   selectedUser?._id &&
-  //     onlineUsers.some((user) => user._id === selectedUser._id)
+  // //     onlineUsers.some((user) => user._id === selectedUser._id)
   // );
   
   return (
@@ -29,10 +34,9 @@ const ChatHeader = () => {
           {selectedUser?._id && onlineUsers.some(user => user._id === selectedUser._id) && (
             <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-white" />
           )}
-
-
         </div>
-
+          
+          
         {/* User Info */}
         <div>
           <h3 className="font-semibold text-gray-900">{selectedUser?.username || 'User'}</h3>
@@ -53,6 +57,7 @@ const ChatHeader = () => {
         <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <MoreVertical className="w-5 h-5 text-gray-600" />
         </button>
+
         <button
           onClick={() => setSelectedUser(null)}
           className="p-2 hover:bg-gray-100 rounded-lg transition-colors lg:hidden"

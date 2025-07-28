@@ -6,7 +6,7 @@ import { useAuthStore } from '../../store/useAuthStore';
 import { formatMessageTime } from '../../lib/utils';
 
 const ChatContainer = () => {
-  
+
   const {
     messages,
     getMessages,
@@ -54,6 +54,7 @@ const ChatContainer = () => {
           return (
             <div key={message._id} className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}>
               <div className={`flex gap-3 max-w-xs lg:max-w-md ${isMine ? 'flex-row-reverse' : 'flex-row'}`}>
+              
                 {/* Avatar */}
                 <div className="w-8 h-8 rounded-full border-2 border-white shadow-sm overflow-hidden flex-shrink-0">
                   <img

@@ -21,6 +21,8 @@ const Sidebar = () => {
 
   if (isUsersLoading) return <SidebarSkeleton />;
 
+  {console.log("Filtered Users:", filteredUsers)}
+  {console.log("online Users:", onlineUsers)}
   return (
     <aside className="h-full w-20 lg:w-80 border-r border-gray-200 flex flex-col transition-all duration-200 pt-8">
       {/* Header */}
@@ -71,6 +73,7 @@ const Sidebar = () => {
               selectedUser?._id === user._id ? 'bg-blue-50 border-r-2 border-blue-500' : ''
             }`}
           >
+
             <div className="relative mx-auto lg:mx-0">
               <img
                 src={user.avatar || '/avatar.png'}
@@ -85,6 +88,7 @@ const Sidebar = () => {
             {/* User info - only visible on larger screens */}
             <div className="hidden lg:block text-left min-w-0 flex-1">
               <div className="font-medium truncate text-gray-900">{user.username}</div>
+
               <div className="text-sm text-gray-500">
                 {onlineUsers.includes(user._id) ? 'Online' : 'Offline'}
               </div>
