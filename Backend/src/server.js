@@ -5,34 +5,66 @@ import messageRouter from './routes/message.route.js';
 import connectDB from './lib/db.js'
 import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
+import { Server } from 'socket.io';
+import http from 'http';
+
 
 dotenv.config();
 
 const app = express();
 
+const server = http.createServer(app);
+
 // Middleware
-app.use(express.json()); // Allow server to understand json data
-app.use(cookieParser()); // Allows server to parse cookies
+app.use(express.json()); 
+app.use(cookieParser());
 
-// Connect to MongoDB
-app.use(cors({
-    origin: 'http://localhost:3000', // Allow requests from this origin
-    credentials: true, // Allow cookies to be sent with requests
-    })); //Allow frontend to com wit backend
 
+//Allow frontend to com wit backend
+const io = new Server(server, {
+    cors: {
+        origin: 'http://localhost:3000',
+        credentials: true, 
+        }
+});
+
+// socket.io connection
+io.on('connection', (socket) => {
+    console.log('New client connected', socket.id);
+
+    // join user to their own room
+    socket.on('join', (userId) => {
+        socket.join(userId)
+    });
+
+    // Relay a message
+    socket.on('send message', (senderId, receiverId, text, avater) => {
+        io.to(receiverId).emit('getMessage', {
+            senderId,
+            text,
+            avater,
+            createdAt: new Date(),
+        });
+    });
+
+    socket.on('disconnect', () => {
+        console.log('client disconnected: ', socket.id)
+    })
+});
 
 
 app.get('/', (req, res) => {
     res.send('API is runnin ...')
 })
 
-app.use('/api/auth', authRouter); // Use authRouter for authentication routes
+//Routes
+app.use('/api/auth', authRouter); 
+app.use('/api/message', messageRouter);
 
-app.use('/api/message', messageRouter); // Use messageRouter for messaging routes
-
-
+// Connect to MongoDB
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
     connectDB();    
 })
